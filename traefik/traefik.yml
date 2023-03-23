@@ -1,0 +1,31 @@
+log: 
+  level: DEBUG
+
+api:
+  dashboard: true
+  insecure: true
+
+providers:
+  docker:
+    watch: true
+
+entryPoints:
+  websecure:
+    address: ":443"
+  web:
+    address: ":80"
+    http: 
+      redirections:
+        entryPoint: 
+          scheme: https
+          to: websecure
+
+
+certificatesResolvers:
+  letsEncryptResolver:
+    acme:
+      email: paturetromain@gmail.com
+      storage: "/acme.json"
+      dnsChallenge:
+        provider: ovh
+        delayBeforeCheck: "0"

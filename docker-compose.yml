@@ -1,8 +1,33 @@
 version: "3"
 
 services:
+
+  traefik:
+    image: traefik:v2.9
+    container_name: traefik
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik/acme.json:/acme.json
+    labels:
+      # traefik.http.routers.traefik.rule: Host(`traefik.paturet.fr`)
+      # traefik.http.routers.traefik.entrypoints: websecure
+      # traefik.http.routers.traefik.tls.certresolver: letsEncryptResolver
+      traefik.http.routers.traefik.service: api@internal
+    environment:
+      - OVH_APPLICATION_KEY=928fff6b8428e0b1 
+      - OVH_APPLICATION_SECRET=d49cfef34e17047865af9a3ef8956d83 
+      - OVH_CONSUMER_KEY=883a4c01e05cdcd189ace6fa7deb7421 
+      - OVH_ENDPOINT=ovh-eu
+
   grafana:
     image: grafana/grafana
+    restart: always
     container_name: grafana
     ports:
       - "3000:3000"
@@ -11,7 +36,12 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
     environment:
       - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
-      - GF_SECURITY_ADMIN_PASSWORD=yourpassword
+      - GF_SECURITY_ADMIN_PASSWORD=nara
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.paturet.fr`)
+      - traefik.http.routers.grafana.entrypoints=websecure
+      - traefik.http.routers.grafana.tls.certresolver=letsEncryptResolver
   database:
     image: postgres
     restart: always

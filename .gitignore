@@ -1,0 +1,6 @@
+.lego/accounts/acme-v02.api.letsencrypt.org/paturetromain@gmail.com/account.json
+.lego/accounts/acme-v02.api.letsencrypt.org/paturetromain@gmail.com/keys/paturetromain@gmail.com.key
+.lego/certificates/grafana.paturet.fr.crt
+.lego/certificates/grafana.paturet.fr.issuer.crt
+.lego/certificates/grafana.paturet.fr.json
+.lego/certificates/grafana.paturet.fr.key
