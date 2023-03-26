@@ -4,7 +4,8 @@ import psycopg2
 # docker exec -it 4bacb14e172c psql -U myuser -d mydatabase --password
 
 # Load the JSON data from file
-with open('./medecins.json', 'r') as f:
+
+with open('./medecins_minimized.json', 'r') as f:
     data = json.load(f)
 
 # Connect to the PostgreSQL database
