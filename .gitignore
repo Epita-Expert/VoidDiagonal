@@ -4,3 +4,4 @@
 .lego/certificates/grafana.paturet.fr.issuer.crt
 .lego/certificates/grafana.paturet.fr.json
 .lego/certificates/grafana.paturet.fr.key
+.DS_Store
