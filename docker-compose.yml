@@ -14,6 +14,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./traefik/acme.json:/acme.json
+      - ./traefik/dynamic_conf.yml:/dynamic_conf.yml
     labels:
       # traefik.http.routers.traefik.rule: Host(`traefik.paturet.fr`)
       # traefik.http.routers.traefik.entrypoints: websecure
